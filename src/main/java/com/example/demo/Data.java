@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
@@ -22,6 +24,7 @@ import com.mongodb.client.MongoDatabase;
 public class Data {
 	
 	@Autowired TimeSeries timeSeriesData;
+	@Autowired UiInterface uiInterface;
    
 	@JsonProperty("Meta Data")
 	private MetaData metaData;
@@ -46,16 +49,30 @@ public class Data {
 
     // Retrieving a collection
     MongoCollection<Document> collection = database.getCollection("sampleCollection"); 
+    
+    List<Double> list=new ArrayList<>();
+    List<Double> volume=new ArrayList<>();
+    List<Double> timeSer=new ArrayList<>();
    
     public void removeAll()
     {
     	BasicDBObject document = new BasicDBObject();
     	collection.deleteMany(document);
     	System.out.println("document removed successfully");
+    	list.clear();
+        uiInterface.setOpen(list);
+        timeSer.clear();
+        uiInterface.setTimeSpan(timeSer);
+        volume.clear();
+        uiInterface.setVolume(volume);
+        
     }
+    int i=0;
+    double j=0;
 	public void setValue()
 	{
-				     
+				     list.add(Double.parseDouble(timeSeriesData.getOpen()));
+				     volume.add(Double.parseDouble(timeSeriesData.getVolume()));
 						
 						  Document document = new Document("Time", timeSeriesData.getTime()) 
 							        .append("open", timeSeriesData.getOpen())
@@ -65,6 +82,22 @@ public class Data {
 							        .append("volume", timeSeriesData.getVolume());  
 							        collection.insertOne(document); 
 							        System.out.println("Document inserted successfully");
+							        
+							       
+							        
+							        uiInterface.setOpen(list);
+							        uiInterface.setVolume(volume);
+							       
+							            
+							        	timeSer.add(j);
+							        	//System.out.println(timeSer.size()+"size");
+							        	
+							        
+							        uiInterface.setTimeSpan(timeSer);
+							        j++;
+							        i++;
+							        
+							        
 		        
 		     // Creating a Mongo client 
 		        
