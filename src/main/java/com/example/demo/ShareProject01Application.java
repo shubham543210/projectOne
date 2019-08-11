@@ -31,3 +31,10 @@ public class ShareProject01Application {
 	}
 
 }
+
+/*
+ * Note-While running the code error message will be shown 
+ * in console as config is written to connect to 
+ * local mongo.Which I have not removed for testing purpose.
+ * No need to be bothered about it as of now.
+ */
