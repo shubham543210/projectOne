@@ -27,75 +27,74 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class ServiceClass {
-	
-	@Autowired 
+
+	@Autowired
 	Data data;
-	
+
 	@Autowired
 	TimeSeries timeSeries;
 	RestTemplate restTemplate = new RestTemplate();
 
-	
+	// After every 36 seconds this method will be excequted automatically.
 	@Scheduled(fixedRate = 36000)
 	public void getData() {
-		//Data data = restTemplate.getForObject(
-		//		"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=ACN&interval=15min&apikey=JVNI9RRYW2W6WSKG",
-		//		Data.class);
-		
-		
-		 try { 
 
-	            URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=ACN&interval=15min&apikey=JVNI9RRYW2W6WSKG"); 
-	            HttpURLConnection connection = (HttpURLConnection) url.openConnection(); 
-	          //  connection.setDoOutput(true); 
-	          //  connection.setInstanceFollowRedirects(false); 
-	            connection.setRequestMethod("GET"); 
-	            connection.setRequestProperty("Content-Type", "application/json"); 
+		try {
 
-	           
-	            
-	            BufferedReader br = new BufferedReader(new InputStreamReader(
-	                    (connection.getInputStream()))); // Getting the response from the webservice
-	            String message = org.apache.commons.io.IOUtils.toString(br);
-	            JSONObject json = new JSONObject(message);
-	            Map<String,Object> map= new HashMap<>();
-	            //map=  new ObjectMapper().readValue(json, HashMap.class);;
-	            //HashMap<String, Object> yourHashMap = new Gson().fromJson(yourJsonObject.toString(), HashMap.class);
-	           
+			/*
+			 * Url with complete information like ACN here denotes accenture. Apikey is user
+			 * specific. For complete info please visit alphavantage documentation site. You
+			 * can also run directly on postman and check results.
+			 */
+			URL url = new URL(
+					"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=ACN&interval=15min&apikey=JVNI9RRYW2W6WSKG");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Content-Type", "application/json");
 
-	            connection.getResponseCode(); 
-	            connection.disconnect(); 
-	            
-	            HashMap<String,Object> result =
-	                    new ObjectMapper().readValue(message, HashMap.class);
-	            Map<String,Object> output=(Map<String, Object>) result.get("Time Series (15min)");
-	            
-	            System.out.println("Output from Server .... \n"+output.keySet());
-	            
-	            int i=output.size();
-	            
-	            for (Entry<String, Object> entry : output.entrySet()) {
-	            	timeSeries.setTime(entry.getKey());  
-	            	Map<String,String> statics=(Map<String, String>) entry.getValue();
-	            	timeSeries.setClose(statics.get("4. close"));
-	            	timeSeries.setHigh(statics.get("2. high"));
-	            	timeSeries.setLow(statics.get("3. low"));
-	            	timeSeries.setOpen(statics.get("1. open"));
-	            	timeSeries.setVolume(statics.get("5. volume"));
-	            	
-	            	data.setValue();
-	            }
-	           
-	           
-	        } catch(Exception e) { 
-	            throw new RuntimeException(e); 
-	        } 
-		 
+			// Fetching response from webservice
+			BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+			String message = org.apache.commons.io.IOUtils.toString(br);
+			connection.getResponseCode();
+			connection.disconnect();
+			HashMap<String, Object> result = new ObjectMapper().readValue(message, HashMap.class);
+			Map<String, Object> output = (Map<String, Object>) result.get("Time Series (15min)");
+
+			// This is one time hit on webservice.It will fetch data only once when getData
+			// method is called.
+			System.out.println("new hit at webservice \n " + output.keySet());
+
+			// The data that we get here is 15 min series data. with total approx 600 (15
+			// min) data in this series.And after every 15 min one data set is added by
+			// alphavantage.
+			int i = output.size();
+
+			// getting individual attributes from data set.
+			for (Entry<String, Object> entry : output.entrySet()) {
+				timeSeries.setTime(entry.getKey());
+				Map<String, String> statics = (Map<String, String>) entry.getValue();
+				timeSeries.setClose(statics.get("4. close"));
+				timeSeries.setHigh(statics.get("2. high"));
+				timeSeries.setLow(statics.get("3. low"));
+				timeSeries.setOpen(statics.get("1. open"));
+				timeSeries.setVolume(statics.get("5. volume"));
+
+				// This will store data in mongodb.Note here that one set of 15 min data is
+				// inserted once at a time. This insertion will continue till all 600 datasets
+				// are inserted.
+				data.setValue();
+			}
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
 	}
-	
+
+	// after every 3 min old data is deleted from mongodb so that we dont overshoot
+	// 500 mb of data alloted to us at cloud.
 	@Scheduled(fixedRate = 180000)
-	public void removeAllService()
-	{
+	public void removeAllService() {
 		data.removeAll();
 	}
 }

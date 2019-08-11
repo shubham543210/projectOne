@@ -17,7 +17,7 @@ public class TimeSeries {
 	String close;
 	@JsonProperty("5. volume")
 	String volume;
-	
+
 	String time;
 
 	public String getTime() {

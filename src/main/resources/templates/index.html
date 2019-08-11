@@ -1,53 +1,19 @@
-<html  xmlns:th="https://thymeleaf.org">  
-<head>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-      google.charts.load('current', {'packages':['line']});
-      google.charts.setOnLoadCallback(drawChart);
+<html>
 
-    function drawChart() {
-
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Day');
-      data.addColumn('number', 'Guardians of the Galaxy');
-      data.addColumn('number', 'The Avengers');
-      var x=[1,2,3,4,5]
-      var y=[10,20,30,40,50]
-      var z=[15,25,35,45,55]
-      var arr=[];
-
-      for (var i = 0; i < x.length; i++) {
-
-      arr.push([x[i],y[i],z[i]])
-
-      };
- data.addRows(
-arr
- )
-
-
-
-      var options = {
-        chart: {
-          title: 'price of share',
-          subtitle: 'in (USD)'
-        },
-        width: 900,
-        height: 500,
-        axes: {
-          x: {
-            0: {side: 'bottom'}
-          }
-        }
-      };
-
-      var chart = new google.charts.Line(document.getElementById('line_top_x'));
-
-      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
-  </script>
-</head>
-<body>
-<div id="line_top_x"></div>
-</body>
+<h1>welcome to project01</h1>
+<h2>phase 01 --fetching data from source</h2>
+<h2>phase 02 --writing a complete flow</h2>
+<h2>phase 03 --usage of R language and structuring of project</h2>
+<h2>phase 04 --usage of python and structuring of project</h2>
+<h2>phase 05 --availabilty on mobile plateform like android</h2>
+<h3>Any feedback is openly welcomed</h3>
+<h3>@Auther Shubham Jaiswal</h3>
+<STYLE type="text/css">
+H4 {
+	text-align: right
+}
+</STYLE>
+<br>
+<br>
+<h4>Project review date --29 dec 2019</h4>
 </html>
