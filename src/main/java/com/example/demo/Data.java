@@ -78,7 +78,7 @@ public class Data {
 
 		// note-- 15 min data set is entered as one document.
 		collection.insertOne(document);
-		System.out.println("Document inserted successfully in mongo");
+		System.out.println("Document inserted successfully in mongo"+timeSeriesData.getTime());
 
 		uiInterface.setOpen(list);
 		uiInterface.setVolume(volume);

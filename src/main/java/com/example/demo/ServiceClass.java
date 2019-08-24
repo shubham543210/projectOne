@@ -36,11 +36,11 @@ public class ServiceClass {
 	RestTemplate restTemplate = new RestTemplate();
 
 	// After every 36 seconds this method will be excequted automatically.
-	@Scheduled(fixedRate = 36000)
+	@Scheduled(fixedRate = 900000)
 	public void getData() {
 
 		try {
-
+			data.removeAll();
 			/*
 			 * Url with complete information like ACN here denotes accenture. Apikey is user
 			 * specific. For complete info please visit alphavantage documentation site. You
@@ -93,8 +93,8 @@ public class ServiceClass {
 
 	// after every 3 min old data is deleted from mongodb so that we dont overshoot
 	// 500 mb of data alloted to us at cloud.
-	@Scheduled(fixedRate = 180000)
-	public void removeAllService() {
-		data.removeAll();
-	}
+//	@Scheduled(fixedRate = 890000)
+//	public void removeAllService() {
+//		data.removeAll();
+//	}
 }
