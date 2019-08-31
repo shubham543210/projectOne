@@ -4,7 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /*
  * Project01 is a project written from scratch which 
@@ -22,6 +28,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //Enables Spring's scheduled task execution capability.
 @SpringBootApplication
 @EnableScheduling
+@EnableSwagger2
 public class ShareProject01Application {
 
 	private static final Logger log = LoggerFactory.getLogger(ShareProject01Application.class);
@@ -29,8 +36,16 @@ public class ShareProject01Application {
 	public static void main(String[] args) {
 		SpringApplication.run(ShareProject01Application.class, args);
 	}
+	
+	@Bean
+	public Docket productApi() {
+	   return new Docket(DocumentationType.SWAGGER_2).select()
+	      .apis(RequestHandlerSelectors.basePackage("com.example.demo")).build();
+	}
 
 }
+
+//swagger -ui--http://localhost:8080/swagger-ui.html
 
 /*
  * Note-While running the code error message will be shown 
