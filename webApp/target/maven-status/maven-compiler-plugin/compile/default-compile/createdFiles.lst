@@ -1,0 +1,6 @@
+webAppPackage\activity\InitializerActivity.class
+webAppPackage\service\DataService.class
+webAppPackage\controller\GraphController.class
+webAppPackage\service\GraphService.class
+webAppPackage\ShareProject01Application.class
+webAppPackage\service\LinearRegressionService.class

@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.shareProject.project001</groupId>
+    <artifactId>project001</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+      <groupId>webApp</groupId>
+<artifactId>webApp</artifactId>
+<version>1.0</version>
+<packaging>jar</packaging>
+<name>webApp</name>
+<dependencies>
+  <dependency> 
+        <groupId>project001Comman</groupId>
+        <artifactId>project001Comman</artifactId>
+        <version>1.0</version>
+    </dependency>
+     <dependency>
+        <groupId>project001Domain</groupId>
+        <artifactId>project001Domain</artifactId>
+        <version>1.0</version>
+    </dependency>
+     <dependency>
+        <groupId>userInterface</groupId>
+        <artifactId>userInterface</artifactId>
+        <version>1.0</version>
+    </dependency>
+    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+</dependencies>
+<!--   <dependencies> -->
+<!--   	<dependency> -->
+<!--         <groupId>org.mongodb</groupId> -->
+<!--         <artifactId>mongodb-driver-sync</artifactId> -->
+<!--         <version>3.10.2</version> -->
+<!--     </dependency> -->
+
+<!-- <dependency> -->
+<!--         <groupId>org.springframework.data</groupId> -->
+<!--         <artifactId>spring-data-mongodb</artifactId> -->
+<!--     </dependency> -->
+  <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+<!-- <dependency> -->
+<!--     <groupId>org.mongodb</groupId> -->
+<!--     <artifactId>mongo-java-driver</artifactId> -->
+<!--     <version>3.8.0</version> -->
+<!-- </dependency> -->
+<!--  <dependency> -->
+<!--         <groupId>project001Comman</groupId> -->
+<!--         <artifactId>project001Comman</artifactId> -->
+<!--         <version>1.0</version> -->
+<!--     </dependency> -->
+<!--      <dependency> -->
+<!--         <groupId>project001Domain</groupId> -->
+<!--         <artifactId>project001Domain</artifactId> -->
+<!--         <version>1.0</version> -->
+<!--     </dependency> -->
+<!--      <dependency> -->
+<!--         <groupId>userInterface</groupId> -->
+<!--         <artifactId>userInterface</artifactId> -->
+<!--         <version>1.0</version> -->
+<!--     </dependency> -->
+<!--       <dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-web</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-web-services</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-test</artifactId> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+<!-- 			<dependency> -->
+<!--    <groupId>org.json</groupId> -->
+<!--    <artifactId>json</artifactId> -->
+<!--    <version>20080701</version> -->
+<!-- </dependency> -->
+<!-- <dependency> -->
+<!--     <groupId>org.springframework.boot</groupId> -->
+<!--     <artifactId>spring-boot-starter-security</artifactId> -->
+<!--     <version>2.2.1.RELEASE</version> -->
+<!-- </dependency> -->
+
+<!-- 	<dependency> -->
+<!--    <groupId>io.springfox</groupId> -->
+<!--    <artifactId>springfox-swagger2</artifactId> -->
+<!--    <version>2.7.0</version> -->
+<!-- </dependency> -->
+<!-- <dependency> -->
+<!--    <groupId>io.springfox</groupId> -->
+<!--    <artifactId>springfox-swagger-ui</artifactId> -->
+<!--    <version>2.7.0</version> -->
+<!-- </dependency> -->
+<!--   </dependencies> -->
+<build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
+</project>

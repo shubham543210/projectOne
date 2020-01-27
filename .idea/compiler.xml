@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="project001Comman" />
+        <module name="project001Domain" />
+        <module name="userInterface" />
+        <module name="webApp" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="project001" target="1.8" />
+      <module name="project001Comman" target="1.8" />
+      <module name="project001Domain" target="1.8" />
+      <module name="userInterface" target="1.8" />
+      <module name="webApp" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="project001Comman" options="-parameters" />
+      <module name="project001Domain" options="-parameters" />
+      <module name="userInterface" options="-parameters" />
+      <module name="webApp" options="-parameters" />
+    </option>
+  </component>
+</project>

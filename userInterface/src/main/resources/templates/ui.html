@@ -1,0 +1,346 @@
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', '1 unit is 15 min');
+      data.addColumn('number', 'volume');
+    
+      var x=[[${timeSpan}]]
+     
+      
+      var z=[[${volume}]];
+  
+      
+      var arr=[];
+
+      for (var i = 0; i < x.length; i++) {
+
+      arr.push([x[i],z[i]])
+
+      };
+ data.addRows(
+arr
+ )
+
+
+
+      var options = {
+        chart: {
+          title: 'volume traded',
+          subtitle: 'in (USD)'
+        },
+        width: 1500,
+        height: 500,
+        axes: {
+          x: {
+            0: {side: 'bottom'}
+          }
+        }
+      };
+
+      var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    
+
+
+
+      var data2 = new google.visualization.DataTable();
+      data2.addColumn('number', '1 unit is 15 min');
+      data2.addColumn('number', 'open share price');
+      
+    
+      var a=[[${timeSpan}]]
+     
+      var b=[[${open}]];
+      
+     
+  
+      
+      var arr2=[];
+
+      for (var i = 0; i < a.length; i++) {
+
+      arr2.push([a[i],b[i]])
+
+      };
+ data2.addRows(
+arr2
+ )
+
+
+
+      var options2 = {
+        chart: {
+          title: 'price of share',
+          subtitle: 'in (USD)'
+        },
+        width: 1500,
+        height: 500,
+        axes: {
+          a: {
+            0: {side: 'bottom'}
+          }
+        }
+      };
+
+      var chart2 = new google.charts.Line(document.getElementById('line_bottom_x'));
+
+      chart2.draw(data2, google.charts.Line.convertOptions(options2));
+      
+      
+      //new flow
+      
+      var button = document.getElementById('change-chart');
+      var chartDiv = document.getElementById('chart_div');
+
+      var data3 = new google.visualization.DataTable();
+      data3.addColumn('number', '1 unit is 15 min');
+      data3.addColumn('number', "open share price");
+      data3.addColumn('number', "volume");
+      
+      var k=[[${timeSpan}]]
+      
+      var l=[[${open}]]
+      
+      var m=[[${volume}]]
+
+      
+      var arr3=[];
+
+      for (var i = 0; i < k.length; i++) {
+
+      arr3.push([k[i],l[i],m[i]])
+
+      };
+ data3.addRows(
+arr3
+ )
+     
+
+      var materialOptions = {
+        chart: {
+          title: 'Relation between volume of share sold and share opening price'
+        },
+        width: 1500,
+        height: 500,
+        series: {
+          // Gives each series an axis name that matches the Y-axis below.
+          0: {axis: 'openPrice'},
+          1: {axis: 'volumeSold'}
+        },
+        axes: {
+          // Adds labels to each axis; they don't have to match the axis names.
+          y: {
+        	  openPrice: {label: 'open price'},
+        	  volumeSold: {label: 'volume'}
+          }
+        }
+      };
+
+      var classicOptions = {
+        title: 'open price vs volume sold',
+        width: 1500,
+        height: 500,
+        // Gives each series an axis that matches the vAxes number below.
+        series: {
+          0: {targetAxisIndex: 0},
+          1: {targetAxisIndex: 1}
+        },
+        vAxes: {
+          // Adds titles to each axis.
+          0: {title: 'open price'},
+          1: {title: 'volume'}
+        },
+        hAxis: {
+          ticks: k
+        },
+        vAxis: {
+          viewWindow: {
+            max: 30
+          }
+        }
+      };
+
+      function drawMaterialChart() {
+        var materialChart = new google.charts.Line(chartDiv);
+        materialChart.draw(data3, materialOptions);
+        button.innerText = 'Change to Classic';
+        button.onclick = drawClassicChart;
+      }
+
+      function drawClassicChart() {
+        var classicChart = new google.visualization.LineChart(chartDiv);
+        classicChart.draw(data, classicOptions);
+        button.innerText = 'Change to Material';
+        button.onclick = drawMaterialChart;
+      }
+
+      drawMaterialChart();
+      
+      //Fourth flow
+      
+      var button2 = document.getElementById('change-chart2');
+      var chartDiv2 = document.getElementById('chart_div2');
+
+      var data4 = new google.visualization.DataTable();
+      data4.addColumn('number', '1 unit is 15 min');
+      data4.addColumn('number', "open share price");
+      data4.addColumn('number', "predicted volume");
+      
+      var kk=[[${timeSpan}]]
+      
+      var ll=[[${open}]]
+      
+      var mm=[[${predictedValue}]]
+
+      
+      var arr4=[];
+
+      for (var i = 0; i < k.length; i++) {
+
+      arr4.push([kk[i],ll[i],mm[i]])
+
+      };
+ data4.addRows(
+arr4
+ )
+     
+
+      var materialOptions4 = {
+        chart: {
+          title: 'Relation between predicted volume of share to be traded at a perticular share open price'
+        },
+        width: 1500,
+        height: 500,
+        series: {
+          // Gives each series an axis name that matches the Y-axis below.
+          0: {axis: 'openPrice'},
+          1: {axis: 'predictedVolumeSold'}
+        },
+        axes: {
+          // Adds labels to each axis; they don't have to match the axis names.
+          y: {
+        	  openPrice: {label: 'open price'},
+        	  predictedVolumeSold: {label: 'predictedVolume'}
+          }
+        }
+      };
+
+      var classicOptions4 = {
+        title: 'open price vs volume sold',
+        width: 1500,
+        height: 500,
+        // Gives each series an axis that matches the vAxes number below.
+        series: {
+          0: {targetAxisIndex: 0},
+          1: {targetAxisIndex: 1}
+        },
+        vAxes: {
+          // Adds titles to each axis.
+          0: {title: 'open price'},
+          1: {title: 'volume'}
+        },
+        hAxis: {
+          ticks: k
+        },
+        vAxis: {
+          viewWindow: {
+            max: 30
+          }
+        }
+      };
+
+      function drawMaterialChart4() {
+        var materialChart = new google.charts.Line(chartDiv2);
+        materialChart.draw(data4, materialOptions);
+        button.innerText = 'Change to Classic';
+        button.onclick = drawClassicChart4;
+      }
+
+      function drawClassicChart4() {
+        var classicChart = new google.visualization.LineChart(chartDiv2);
+        classicChart.draw(data4, classicOptions);
+        button.innerText = 'Change to Material';
+        button.onclick = drawMaterialChart4;
+      }
+      
+      drawMaterialChart4();
+      
+      //fifth flow
+      
+        
+
+      var data5 = new google.visualization.DataTable();
+      data5.addColumn('number', '1 unit is 15 min');
+      data5.addColumn('number', 'volume');
+      data5.addColumn('number', 'predictedVolume');
+    
+      var xx=[[${timeSpan}]]
+     
+      
+      var yy=[[${volume}]];
+      
+      var zz=[[${predictedValue}]];
+  
+      
+      var arr5=[];
+
+      for (var i = 0; i < xx.length; i++) {
+
+      arr5.push([xx[i],yy[i],zz[i]])
+
+      };
+ data5.addRows(
+arr5
+ )
+
+
+
+      var options5 = {
+        chart: {
+          title: 'original volume vs predicted volume',
+          subtitle: 'in (USD)'
+        },
+        width: 1500,
+        height: 500,
+        axes: {
+          x: {
+            0: {side: 'bottom'}
+          }
+        }
+      };
+
+      var chart5 = new google.charts.Line(document.getElementById('line_middle_x'));
+
+      chart5.draw(data5, google.charts.Line.convertOptions(options5));
+    
+
+
+
+    }
+  </script>
+</head>
+<body>
+	<div id="line_top_x"></div>
+	<br>
+	<div id="line_bottom_x"></div>
+
+	<button id="change-chart">Change to Classic</button>
+	<br>
+	<br>
+	<div id="chart_div"></div>
+	<button id="change-chart2">Change to Classic</button>
+	<br>
+	<br>
+	<div id="chart_div2"></div>
+	<div id="line_middle_x"></div>
+</body>
+</html>
