@@ -30,7 +30,7 @@ public class GraphService {
 	public void getData() {
 
 		try {
-			data.removeAll();
+			//data.removeAll();
 			/*
 			 * Url with complete information like ACN here denotes accenture. Apikey is user
 			 * specific. For complete info please visit alphavantage documentation site. You

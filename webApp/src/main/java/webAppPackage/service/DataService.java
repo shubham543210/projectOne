@@ -39,20 +39,20 @@ public class DataService {
 
 	// making connection with mongo atlas.You can get complete usage details and
 	// other statics if you login in mongo atlas.
-	MongoClient mongoClient = MongoClients.create(
-			"mongodb://shubham:Shubham.2@cluster0-shard-00-00-ovwhc.mongodb.net:27017,cluster0-shard-00-01-ovwhc.mongodb.net:27017,cluster0-shard-00-02-ovwhc.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority");
+	//MongoClient mongoClient = MongoClients.create(
+	//		"mongodb://shubham:Shubham.2@cluster0-shard-00-00-ovwhc.mongodb.net:27017,cluster0-shard-00-01-ovwhc.mongodb.net:27017,cluster0-shard-00-02-ovwhc.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority");
 	// Accessing the database
-	MongoDatabase database = mongoClient.getDatabase("mydb");
+	//MongoDatabase database = mongoClient.getDatabase("mydb");
 
 	// Retrieving a collection
-	MongoCollection<Document> collection = database.getCollection("sampleCollection");
+	//MongoCollection<Document> collection = database.getCollection("sampleCollection");
 
 	List<Double> list = new ArrayList<>();
 	List<Double> volume = new ArrayList<>();
 	List<Double> timeSer = new ArrayList<>();
 
 	// method to empty collection and lists.
-	public void removeAll() {
+	/*public void removeAll() {
 		BasicDBObject document = new BasicDBObject();
 		collection.deleteMany(document);
 		System.out.println("document removed successfully");
@@ -63,7 +63,7 @@ public class DataService {
 		volume.clear();
 		uiInterfaceDomain.setVolume(volume);
 
-	}
+	}*/
 
 	int i = 0;
 	double j = 0;
@@ -72,13 +72,13 @@ public class DataService {
 		list.add(Double.parseDouble(timeSeriesDomainData.getOpen()));
 		volume.add(Double.parseDouble(timeSeriesDomainData.getVolume()));
 
-		Document document = new Document("Time", timeSeriesDomainData.getTime()).append("open", timeSeriesDomainData.getOpen())
+	/*	Document document = new Document("Time", timeSeriesDomainData.getTime()).append("open", timeSeriesDomainData.getOpen())
 				.append("high", timeSeriesDomainData.getHigh()).append("low", timeSeriesDomainData.getLow())
 				.append("close", timeSeriesDomainData.getClose()).append("volume", timeSeriesDomainData.getVolume());
 
 		// note-- 15 min data set is entered as one document.
 		collection.insertOne(document);
-		System.out.println("Document inserted successfully in mongo"+ timeSeriesDomainData.getTime());
+		System.out.println("Document inserted successfully in mongo"+ timeSeriesDomainData.getTime());*/
 
 		uiInterfaceDomain.setOpen(list);
 		uiInterfaceDomain.setVolume(volume);
