@@ -31,6 +31,8 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 	{
 	 return NoOpPasswordEncoder.getInstance();	
 	}
+
+	
 	
 	@Override
 	
